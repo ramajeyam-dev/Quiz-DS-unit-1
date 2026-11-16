@@ -1,0 +1,218 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>DS Unit 1 Quiz</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+/* Layout: single centered column, one question per screen, thumb-reachable bottom action bar */
+:root {
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --fg: #14202b;
+  --muted: #5d6b78;
+  --line: #d9e0e6;
+  --accent: #0b6e8a;
+  --accent-fg: #ffffff;
+  --good: #1a7f4b;
+  --good-bg: #e3f4ea;
+  --bad: #b3261e;
+  --bad-bg: #fbe8e6;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1820; --surface: #17232d; --fg: #e8eef3; --muted: #93a3b1; --line: #2a3a47;
+    --accent: #4fb8d6; --accent-fg: #06222b; --good: #55c98a; --good-bg: #16352a; --bad: #ff8a80; --bad-bg: #3b1f1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1820; --surface: #17232d; --fg: #e8eef3; --muted: #93a3b1; --line: #2a3a47;
+  --accent: #4fb8d6; --accent-fg: #06222b; --good: #55c98a; --good-bg: #16352a; --bad: #ff8a80; --bad-bg: #3b1f1d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.5;
+  padding-block: 16px 32px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+main { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+h1, h2 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.2; }
+h1 { font-size: 1.9rem; }
+h2 { font-size: 1.25rem; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center; }
+.facts div { border: 1px solid var(--line); border-radius: 8px; padding: 10px 4px; }
+.facts b { display: block; font-family: var(--font-display); font-size: 1.4rem; font-variant-numeric: tabular-nums; }
+.facts span { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+button { font: inherit; cursor: pointer; }
+button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.primary { background: var(--accent); color: var(--accent-fg); border: 0; border-radius: 10px; padding: 14px 20px; font-weight: 600; width: 100%; min-height: 48px; }
+.primary[disabled] { opacity: .4; cursor: not-allowed; }
+.ghost { background: transparent; color: var(--accent); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; min-height: 44px; font-weight: 500; }
+.top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: .9rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--accent); width: 0; transition: width .25s; }
+.opts { display: flex; flex-direction: column; gap: 10px; }
+.opt { display: flex; gap: 12px; align-items: flex-start; text-align: left; width: 100%; background: var(--surface); color: var(--fg); border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px; min-height: 52px; }
+.opt .k { flex: none; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--line); display: grid; place-items: center; font-size: .8rem; font-weight: 600; color: var(--muted); }
+.opt.good { border-color: var(--good); background: var(--good-bg); }
+.opt.good .k { background: var(--good); border-color: var(--good); color: var(--surface); }
+.opt.bad { border-color: var(--bad); background: var(--bad-bg); }
+.opt.bad .k { background: var(--bad); border-color: var(--bad); color: var(--surface); }
+.opt[disabled] { cursor: default; }
+.verdict { font-weight: 600; min-height: 1.5em; }
+.verdict.good { color: var(--good); } .verdict.bad { color: var(--bad); }
+.score { font-family: var(--font-display); font-size: 3.2rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+.review { display: flex; flex-direction: column; gap: 10px; }
+.review article { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; background: var(--surface); }
+.review .you { color: var(--bad); font-size: .92rem; }
+.review .ans { color: var(--good); font-size: .92rem; }
+[hidden] { display: none !important; }
+@media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+</style>
+
+<main>
+  <section id="start" class="card">
+    <p class="muted">Data Structures</p>
+    <h1>Unit 1 Online Test</h1>
+    <p class="muted">ADTs, primitive types, arrays and linked lists. Tap an answer to see right away if it is correct.</p>
+    <div class="facts">
+      <div><b>28</b><span>Questions</span></div>
+      <div><b>1</b><span>Mark each</span></div>
+      <div><b>28</b><span>Total</span></div>
+    </div>
+    <button class="primary" id="begin">Start test</button>
+  </section>
+
+  <section id="quiz" hidden>
+    <div class="card">
+      <div class="top"><span id="count">Question 1 of 28</span><span id="live">Score 0</span></div>
+      <div class="bar" role="progressbar" aria-label="Progress"><i id="fill"></i></div>
+      <h2 id="q"></h2>
+      <div class="opts" id="opts"></div>
+      <p class="verdict" id="verdict" aria-live="polite"></p>
+      <button class="primary" id="next" disabled>Next</button>
+    </div>
+  </section>
+
+  <section id="result" hidden class="card">
+    <p class="muted">Your result</p>
+    <p class="score"><span id="final">0</span> / 28</p>
+    <p id="grade"></p>
+    <button class="primary" id="again">Try again</button>
+    <h2 id="rvtitle">Questions to revisit</h2>
+    <div class="review" id="review"></div>
+  </section>
+</main>
+
+<script>
+var Q = [
+["An Abstract Data Type (ADT) is primarily concerned with ______.", ["Memory allocation","Data storage locations","Operations on data and their behavior","Programming language syntax"], 2],
+["Which statement is TRUE about an ADT?", ["It specifies implementation details.","It hides implementation details.","It cannot be implemented using arrays.","It always uses linked lists."], 1],
+["Which operation is generally supported by almost every ADT?", ["Insert","Delete","Search","All of the above"], 3],
+["Which of the following is a primitive data type?", ["Integer","Stack","Queue","Graph"], 0],
+["Integers are internally represented in a computer using ______.", ["Decimal numbers","Binary numbers","Roman numerals","ASCII"], 1],
+["Which IEEE standard is used for floating-point representation?", ["IEEE 802","IEEE 754","IEEE 1284","IEEE 488"], 1],
+["ASCII is used for representing ______.", ["Floating-point numbers","Characters","Integers","Boolean values"], 1],
+["Which primitive data type stores only two possible values?", ["Character","Float","Boolean","Integer"], 2],
+["Arrays store elements in ______.", ["Random memory locations","Contiguous memory locations","Secondary memory","Stack memory only"], 1],
+["Which operation on an array generally requires shifting elements?", ["Traversal","Access","Insertion","Searching"], 2],
+["The time complexity of accessing the kth element in an array is ______.", ["O(1)","O(log n)","O(n)","O(n²)"], 0],
+["Which of the following is a disadvantage of arrays?", ["Fast random access","Fixed size","Easy traversal","Simple implementation"], 1],
+["A two-dimensional array is mainly used to represent ______.", ["Stack","Queue","Matrix","Graph"], 2],
+["Which formula is used to calculate the address of an element in a one-dimensional array?", ["Base + Index × Size of element","Base × Index","Base − Index","Base + Size"], 0],
+["Which data structure is considered a linear data structure?", ["Tree","Graph","Linked List","Heap"], 2],
+["In a linear list, every element except the first has ______.", ["one predecessor","two predecessors","no predecessor","one child"], 0],
+["Which of the following is NOT a linear data structure?", ["Array","Linked List","Stack","Tree"], 3],
+["Which of the following operations is easiest in a linked list compared to an array?", ["Random access","Insertion at the beginning","Binary search","Accessing the middle element"], 1],
+["Which data structure provides O(1) access time to an element using its index?", ["Linked list","Queue","Array","Stack"], 2],
+["An array of size n is stored in contiguous memory. What is the worst-case time complexity of inserting an element at the beginning?", ["O(1)","O(log n)","O(n)","O(n log n)"], 2],
+["A linked list is preferred over an array when ______.", ["Random access is frequently required.","Frequent insertions and deletions are required.","Binary search is frequently performed.","Memory is contiguous."], 1],
+["The biggest disadvantage of a singly linked list compared to a doubly linked list is ______.", ["Extra memory","No backward traversal","Contiguous memory requirement","Fixed size"], 1],
+["Which operation is performed most efficiently in a linked list compared to an array?", ["Random access","Binary search","Insertion after a known node","Accessing the middle element"], 2],
+["Compared to a singly linked list, a doubly linked list ______.", ["Uses less memory","Uses more memory","Requires no pointers","Cannot be traversed"], 1],
+["Which application commonly uses a circular linked list?", ["Round Robin CPU Scheduling","Binary Search","Merge Sort","Heap Sort"], 0],
+["Which of the following is NOT an application of linked lists?", ["Music playlist","Undo operation","Polynomial manipulation","Binary Search"], 3],
+["Which linked list requires the maximum number of pointer updates during insertion?", ["Singly Linked List","Circular Singly Linked List","Doubly Linked List","Array"], 2],
+["Which statement is FALSE?", ["A circular linked list has no NULL link.","Arrays require contiguous memory.","Linked lists support direct indexing.","Doubly linked lists allow backward traversal."], 2]
+];
+var L = ["A","B","C","D"];
+var $ = function (id) { return document.getElementById(id); };
+var i = 0, score = 0, answered = false, missed = [];
+
+function show(id) {
+  ["start", "quiz", "result"].forEach(function (s) { $(s).hidden = s !== id; });
+  window.scrollTo(0, 0);
+}
+function render() {
+  var q = Q[i];
+  answered = false;
+  $("count").textContent = "Question " + (i + 1) + " of " + Q.length;
+  $("live").textContent = "Score " + score;
+  $("fill").style.width = (i / Q.length * 100) + "%";
+  $("q").textContent = q[0];
+  $("verdict").textContent = ""; $("verdict").className = "verdict";
+  $("next").disabled = true;
+  $("next").textContent = i === Q.length - 1 ? "See result" : "Next";
+  var box = $("opts"); box.innerHTML = "";
+  q[1].forEach(function (text, n) {
+    var b = document.createElement("button");
+    b.className = "opt"; b.type = "button";
+    b.innerHTML = '<span class="k">' + L[n] + '</span><span></span>';
+    b.lastChild.textContent = text;
+    b.addEventListener("click", function () { pick(n); });
+    box.appendChild(b);
+  });
+}
+function pick(n) {
+  if (answered) return;
+  answered = true;
+  var q = Q[i], btns = $("opts").children;
+  for (var k = 0; k < btns.length; k++) {
+    btns[k].disabled = true;
+    if (k === q[2]) btns[k].classList.add("good");
+  }
+  if (n === q[2]) {
+    score++;
+    $("verdict").textContent = "Correct";
+    $("verdict").className = "verdict good";
+  } else {
+    btns[n].classList.add("bad");
+    missed.push({ q: q[0], you: q[1][n], right: q[1][q[2]] });
+    $("verdict").textContent = "Incorrect. The right answer is " + L[q[2]] + ".";
+    $("verdict").className = "verdict bad";
+  }
+  $("live").textContent = "Score " + score;
+  $("fill").style.width = ((i + 1) / Q.length * 100) + "%";
+  $("next").disabled = false;
+  $("next").focus();
+}
+function finish() {
+  $("final").textContent = score;
+  var pct = Math.round(score / Q.length * 100);
+  $("grade").textContent = pct + "%. " + (pct >= 80 ? "Strong grasp of Unit 1." : pct >= 50 ? "Decent start. Review the questions below." : "Go back over the unit notes, then try again.");
+  var r = $("review"); r.innerHTML = "";
+  $("rvtitle").hidden = missed.length === 0;
+  missed.forEach(function (m) {
+    var a = document.createElement("article");
+    var t = document.createElement("b"); t.textContent = m.q;
+    var y = document.createElement("span"); y.className = "you"; y.textContent = "Your answer: " + m.you;
+    var c = document.createElement("span"); c.className = "ans"; c.textContent = "Correct: " + m.right;
+    a.appendChild(t); a.appendChild(y); a.appendChild(c); r.appendChild(a);
+  });
+  show("result");
+}
+function begin() { i = 0; score = 0; missed = []; show("quiz"); render(); }
+$("begin").addEventListener("click", begin);
+$("again").addEventListener("click", begin);
+$("next").addEventListener("click", function () {
+  if (i === Q.length - 1) finish(); else { i++; render(); window.scrollTo(0, 0); }
+});
+</script>
+
+</body></html>
